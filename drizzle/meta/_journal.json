@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1761168393401,
+      "tag": "0000_purple_layla_miller",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1761168536938,
+      "tag": "0001_heavy_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1761425194071,
+      "tag": "0002_mighty_scarlet_witch",
+      "breakpoints": true
+    }
+  ]
+}
