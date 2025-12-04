@@ -1,5 +1,7 @@
+import path from "node:path";
+import Database from "better-sqlite3";
 import { eq, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 import { InsertUser, users, documents, InsertDocument, Document, conversations, InsertConversation, Conversation, messages, InsertMessage, Message, workspaces, InsertWorkspace, Workspace } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -7,9 +9,11 @@ let _db: ReturnType<typeof drizzle> | null = null;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  if (!_db) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const databasePath = ENV.databaseUrl || path.join(process.cwd(), "local.sqlite");
+      const sqlite = new Database(databasePath);
+      _db = drizzle(sqlite);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
